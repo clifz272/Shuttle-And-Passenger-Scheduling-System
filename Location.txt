@@ -1,0 +1,14 @@
+School
+Bank
+Residential_01
+Residential_02
+Residential_03
+Hospital
+Mall
+Airport
+Library
+Office_01
+Office_02
+Office_03
+Stadium
+Park

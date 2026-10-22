@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{12c34879-9be4-4ec2-9cfd-98cf05c59ec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{9da9e905-6894-4820-86b0-afc7509eeecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services">
+      <UniqueIdentifier>{9b8f766a-a844-4d2d-a57e-b252ce4bba40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{1d8f4e03-8e99-45ce-84ad-f2f34df192c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextFiles">
+      <UniqueIdentifier>{cf3ef1fd-3981-4c17-b3e7-70f65a231075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Strategy">
+      <UniqueIdentifier>{1b2a51d9-0096-42e4-a3ac-e420131923c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArrivalTimePriorityStrategy.h">
+      <Filter>Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="passenger.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="schedule.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="shuttle.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="passengerManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="shuttleManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="routePlanner.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityList.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityCrudService.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityInput.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityListController.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="destination.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityShow.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="EntitySort.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ScheduleShow.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="ScheduleAnalyzer.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="StrategyComparer.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="StrategyRegistry.h">
+      <Filter>Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="time.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Id.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="validate.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationResult.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchRule.h">
+      <Filter>Services</Filter>
+    </ClInclude>
+    <ClInclude Include="passengerSize.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="shuttlePackage.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="RoutePlanningStrategy.h">
+      <Filter>Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="MinimumDispatchStrategy.h">
+      <Filter>Strategy</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArrivalTimePriorityStrategy.cpp">
+      <Filter>Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityInput.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityFactory.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="passenger.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="schedule.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ScheduleShow.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="ScheduleAnalyzer.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="shuttle.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="passengerManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="shuttleManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="routePlanner.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="time.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="destination.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Id.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchRule.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="validate.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="passengerSize.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="shuttlePackage.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="MinimumDispatchStrategy.cpp">
+      <Filter>Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="StrategyComparer.cpp">
+      <Filter>Services</Filter>
+    </ClCompile>
+    <ClCompile Include="StrategyRegistry.cpp">
+      <Filter>Strategy</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="passengerList.txt">
+      <Filter>TextFiles</Filter>
+    </Text>
+    <Text Include="shuttleList.txt">
+      <Filter>TextFiles</Filter>
+    </Text>
+    <Text Include="Location.txt">
+      <Filter>TextFiles</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

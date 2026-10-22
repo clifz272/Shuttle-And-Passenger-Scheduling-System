@@ -1,0 +1,398 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class "main.cpp" as Main {
+  + main()
+}
+
+class UI {
+  + readChoice(min, max) : int
+  + showMain() : int
+  + lists() : int
+  + shuttlePassenger(sel) : int
+  + scheduleMenu() : int
+  + strategyMenu(strategyNames) : int
+  + sort1(locationLabel, extraLabel) : void
+  + sort2() : void
+}
+
+struct EntityInputData {
+  + id : string
+  + location : string
+  + arrivalTime : string
+  + extra : string
+}
+
+class EntityInput {
+  + readId(prompt) : string
+  + readItem(locationLabel, extraLabel) : EntityInputData
+  + readUpdatedItem(locationLabel, extraLabel) : EntityInputData
+}
+
+class "EntityListController<T>" as EntityListController {
+  + addItem(...)
+  + deleteItem(...)
+  + editItem(...)
+  + sortItems(...)
+  + saveItems(...)
+  + searchItem(...)
+  + handleAction(...) : bool
+}
+
+class "EntityCrudService<T>" as EntityCrudService {
+  + add(list, idPrefix, input) : OperationResult
+  + remove(list, idPrefix, id) : OperationResult
+  + update(list, idPrefix, currentId, input) : OperationResult
+}
+
+struct OperationResult {
+  + success : bool
+  + message : string
+}
+
+class "EntitySorter<T>" as EntitySorter {
+  + sortId(items/list, ascending)
+  + sortTime(items/list, ascending)
+  + sortLocation(items/list, ascending)
+  + sortExtra(items/list, ascending)
+}
+
+class "EntityShow<T>" as EntityShow {
+  + showOne(item) : void
+  + showDetails(item, locationLabel) : void
+  + showAll(items/list, title, locationLabel, extraLabel) : void
+  + showById(list, id) : bool
+}
+
+class "EntityList<T>" as EntityList {
+  # items : vector<T>
+  + add(item) : bool
+  + removeById(id) : bool
+  + updateById(id, updatedItem) : bool
+  + findById(id) : T*
+  + findById(id) const : const T*
+  + getItems() : vector<T>&
+  + getItems() const : const vector<T>&
+  + isEmpty() : bool
+  + clear() : void
+}
+
+class passengerManager
+class shuttleManager
+
+class "FileManager<T>" as FileManager {
+  + readFile(folderPath, fileName, list) : bool
+  + readFile(folderPath, fileName, list, message) : bool
+  + saveFile(folderPath, fileName, list) : bool
+  + saveFile(folderPath, fileName, list, message) : bool
+  + saveFile(folderPath, fileName, items) : bool
+  + saveFile(folderPath, fileName, items, message) : bool
+  - splitLine(line) : vector<string>
+  - addMessage(message, line) : void
+}
+
+class "EntityFactory<T>" as EntityFactory
+class "EntityFactory<passenger>" as PassengerFactory {
+  + create(fields) : passenger
+}
+class "EntityFactory<shuttle>" as ShuttleFactory {
+  + create(fields) : shuttle
+}
+
+class IdValidator {
+  + idFormatCheck(value) : bool
+  + idCheck(value, prefix) : bool
+  + id(value, prefix) : void
+  + idUniqueCheck(items/list, id) : bool
+}
+class LocationValidator {
+  + destCheck(value) : bool
+  + dest(value) : void
+  + normalizeDest(value) : string
+  + locFile(folderPath) : void
+}
+class TimeValidator {
+  + timeCheck(hour, minute) : bool
+  + time(hour, minute) : void
+  + shuttleOperatingTimeCheck(minutes) : bool
+  + shuttleOperatingTime(minutes) : void
+  + timeTextCheck(value) : bool
+  + timeText(value) : void
+}
+class FileValidator {
+  + txtCheck(fileName) : bool
+  + txt(fileName) : void
+  + fileUniqueCheck(folderPath, fileName) : bool
+  + fileUnique(folderPath, fileName) : void
+  + folderCheck(folderPath) : bool
+  + folder(folderPath) : void
+  + rowCheck(line) : bool
+  + row(line) : void
+  + recordCountCheck(count) : bool
+  + recordCount(count) : void
+}
+class ScheduleValidator {
+  + scheduleGeneratedCheck(generated) : bool
+  + scheduleGenerated(generated) : void
+}
+class MenuValidator {
+  + choiceCheck(value, min, max) : bool
+  + choice(value, min, max) : void
+  + choiceTextCheck(value, min, max) : bool
+  + choiceText(value, min, max) : void
+}
+class CapacityValidator {
+  + passengerSizeCheck(value) : bool
+  + passengerSize(value) : void
+  + passengerSizeTextCheck(value) : bool
+  + passengerSizeText(value) : void
+  + shuttlePackageCheck(value) : bool
+  + shuttlePackage(value) : void
+  + normalizePackage(value) : string
+}
+
+abstract class Entity {
+  - id : Id
+  - arrivalTime : Time
+  + Entity()
+  + Entity(id, arrivalTime)
+  + getId() : Id
+  + getArrivalTime() : Time
+  + setId(id) : void
+  + setArrivalTime(arrivalTime) : void
+  + getLocation() : Destination
+  + getExtraLabel() : string
+  + getExtraValue() : string
+  + getExtraSortValue() : int
+  + toFile() : string
+  + getType() : string
+}
+
+class passenger {
+  friend operator<<
+  - destination : Destination
+  - size : passengerSize
+  + passenger()
+  + passenger(id, destination, arrivalTime)
+  + passenger(id, destination, arrivalTime, size)
+  + getLocation() : Destination
+  + getExtraLabel() : string
+  + getExtraValue() : string
+  + getExtraSortValue() : int
+  + setDestination(destination) : void
+  + getPassengerSize() : passengerSize
+  + setPassengerSize(passengerSize) : void
+  + toFile() : string
+  + getType() : string
+}
+
+class shuttle {
+  friend operator<<
+  - chargingPoint : Destination
+  - package : shuttlePackage
+  + shuttle()
+  + shuttle(id, chargingPoint, arrivalTime)
+  + shuttle(id, chargingPoint, arrivalTime, package)
+  + getLocation() : Destination
+  + getExtraLabel() : string
+  + getExtraValue() : string
+  + getExtraSortValue() : int
+  + setChargingPoint(chargingPoint) : void
+  + toFile() : string
+  + getPackage() : shuttlePackage
+  + getMaxSeats() : int
+  + setPackage(package) : void
+  + getType() : string
+}
+
+class schedule {
+  - assignedShuttle : shuttle
+  - assignedPassengers : vector<passenger>
+  - usedSeats : int
+  - remainingSeats : int
+  + schedule()
+  + schedule(sh)
+  + canAddPassenger(p) : bool
+  + addPassenger(p) : bool
+  + toFile() : string
+  + getAssignedShuttle() : const shuttle&
+  + getAssignedPassengers() : const vector<passenger>&
+  + getUsedSeats() : int
+  + getRemainingSeats() : int
+}
+
+class Id {
+  friend operator<<
+  - value : string
+  + Id()
+  + Id(value, prefix)
+  + isValid() : bool
+  + toString() : string
+  + operator==()
+  + operator<()
+  + operator>()
+}
+class Time {
+  friend operator<<
+  - hour : int
+  - minute : int
+  + Time()
+  + Time(hour, minute)
+  + Time(timeText)
+  + isValid() : bool
+  + toMinutes() : int
+  + toString() : string
+  + operator==()
+  + operator<()
+}
+class Destination {
+  friend operator<<
+  - name : string
+  + Destination()
+  + Destination(name)
+  + isValid() : bool
+  + toString() : string
+  + operator==()
+  + operator<()
+}
+class passengerSize {
+  - value : int
+  + passengerSize()
+  + passengerSize(value)
+  + getValue() : int
+  + toString() : string
+  + operator<()
+}
+class shuttlePackage {
+  - name : string
+  - maxSeats : int
+  + shuttlePackage()
+  + shuttlePackage(name)
+  + toString() : string
+  + getMaxSeats() : int
+  + operator==()
+  + operator<()
+}
+class MatchRule {
+  + locationMatch(shuttle, passenger) : bool
+  + timeMatch(shuttle, passenger) : bool
+  + seatMatch(remainingSeats, passenger) : bool
+  + shuttleOperatingTimeMatch(shuttle) : bool
+  + canAssign(shuttle, remainingSeats, passenger) : bool
+}
+
+abstract class RoutePlanningStrategy {
+  + getName() : string
+  + generate(shuttles, remainingPassengers, remainingShuttles) : vector<schedule>
+}
+class MinimumDispatchStrategy {
+  + getName() : string
+  + generate(...) : vector<schedule>
+}
+class ArrivalTimePriorityStrategy {
+  + getName() : string
+  + generate(...) : vector<schedule>
+}
+class StrategyRegistry {
+  + getStrategies() : vector<unique_ptr<RoutePlanningStrategy>>
+}
+class routePlanner {
+  - schedules : vector<schedule>
+  - workShuttles : vector<shuttle>
+  - workPassengers : vector<passenger>
+  + generate(shuttleManager, passengerManager, strategy) : vector<schedule>
+  + getSchedules() : const vector<schedule>&
+  + getRemainingShuttles() : const vector<shuttle>&
+  + getRemainingPassengers() : const vector<passenger>&
+}
+struct UnassignedReason {
+  + unassignedPassenger : passenger
+  + reason : string
+}
+struct ScheduleStats {
+  + strategyName : string
+  + schedulesUsed : int
+  + unusedShuttles : int
+  + assignedPassengerGroups : int
+  + assignedPeople : int
+  + unassignedPassengerGroups : int
+  + unassignedPeople : int
+  + seatsUsed : int
+  + remainingSeatsInUsedShuttles : int
+  + seatUtilisation : double
+}
+class ScheduleAnalyzer {
+  + getUnassignedReasons(...) : vector<UnassignedReason>
+  + getStats(...) : ScheduleStats
+  + recommendBetterStrategy(first, second) : string
+  + recommendBestStrategy(stats) : string
+  - findReason(possibleSchedules, passenger) : string
+}
+struct StrategyComparisonResult {
+  + strategyStats : vector<ScheduleStats>
+  + recommendation : string
+}
+class StrategyComparer {
+  + compare(shuttles, passengers) : StrategyComparisonResult
+}
+class ScheduleShow {
+  + showSchedules(schedules) : void
+  + showSummary(schedules, remainingShuttles, remainingPassengers) : void
+  + showLeftoversWithReasons(remainingShuttles, reasons) : void
+  + showUnassignedReasons(reasons) : void
+  + showStrategyComparison(stats, recommendation) : void
+}
+
+passenger --|> Entity
+shuttle --|> Entity
+passengerManager --|> EntityList
+shuttleManager --|> EntityList
+MinimumDispatchStrategy --|> RoutePlanningStrategy
+ArrivalTimePriorityStrategy --|> RoutePlanningStrategy
+Entity *-- Id
+Entity *-- Time
+passenger *-- Destination
+passenger *-- passengerSize
+shuttle *-- Destination
+shuttle *-- shuttlePackage
+schedule *-- shuttle
+schedule *-- passenger
+routePlanner *-- schedule
+StrategyComparisonResult *-- ScheduleStats
+UnassignedReason *-- passenger
+Main ..> UI
+Main ..> EntityListController
+Main ..> FileManager
+Main ..> routePlanner
+Main ..> ScheduleShow
+Main ..> StrategyRegistry
+Main ..> StrategyComparer
+EntityListController ..> EntityInput
+EntityListController ..> EntityCrudService
+EntityListController ..> EntitySorter
+EntityListController ..> EntityShow
+EntityListController ..> FileManager
+EntityCrudService ..> EntityList
+EntityCrudService ..> EntityFactory
+EntityCrudService ..> OperationResult
+EntityCrudService ..> IdValidator
+FileManager ..> EntityList
+FileManager ..> EntityFactory
+FileManager ..> FileValidator
+FileManager ..> LocationValidator
+FileManager ..> IdValidator
+EntityFactory ..> passenger
+EntityFactory ..> shuttle
+schedule ..> MatchRule
+ScheduleAnalyzer ..> MatchRule
+routePlanner ..> RoutePlanningStrategy
+routePlanner ..> passengerManager
+routePlanner ..> shuttleManager
+routePlanner ..> schedule
+StrategyRegistry ..> RoutePlanningStrategy
+StrategyComparer ..> StrategyRegistry
+StrategyComparer ..> routePlanner
+StrategyComparer ..> ScheduleAnalyzer
+ScheduleShow ..> ScheduleAnalyzer
+@enduml
